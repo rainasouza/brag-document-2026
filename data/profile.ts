@@ -8,4 +8,7 @@ export const profile = {
     "Uma retrospectiva de nove meses passando por Data Nordeste, Automatic Reporting e SAP, no OCA-UFCG.",
   journeyHint: "Uma jornada de projetos, desafios e aprendizados.",
   githubUrl: "https://github.com/rainasouza",
+  metaTitle: "Raína Souza: Retrospectiva Profissional",
+  metaDescription:
+    "Retrospectiva de nove meses de trabalho na OCA-UFCG: projetos, desafios, aprendizados e próximos passos.",
 };

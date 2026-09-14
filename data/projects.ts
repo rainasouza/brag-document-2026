@@ -9,6 +9,9 @@ export type Project = {
   techs: string[];
   link: string;
   spotlight?: string;
+  dateLabel: string;
+  shortName: string;
+  deepDiveIds?: string[];
 };
 
 export const projects: Project[] = [
@@ -31,6 +34,8 @@ export const projects: Project[] = [
       "O relatório passou de uma string gigante para componentes isolados e reaproveitáveis. Isso destravou tudo que veio depois: multi-tema, redesign do encerramento, novos gráficos, e deixou as mudanças muito mais rápidas e seguras de revisar: em vez de caçar HTML dentro de Python, dá para mexer e testar cada pedaço de UI separadamente, inclusive por quem vem do frontend.",
     techs: ["React", "Vite", "Python", "WeasyPrint"],
     link: "https://github.com/OCA-UFCG/Automatic-Reporting/commit/8a807b5b76c9dd0fbc2705d5337af16330f715d4",
+    dateLabel: "Maio de 2026",
+    shortName: "Jinja → React SSR",
   },
   {
     id: "performance-pipeline",
@@ -50,6 +55,9 @@ export const projects: Project[] = [
       "Reduzi bastante o tempo de renderização naquele momento. Parte desse ganho foi depois impactada por mudanças subsequentes no pipeline, então não reflete mais o número atual, mas o aprendizado sobre os gargalos do WeasyPrint continua valendo.",
     techs: ["Python", "FastAPI", "WeasyPrint", "httpx"],
     link: "https://github.com/OCA-UFCG/Automatic-Reporting/pull/52",
+    dateLabel: "Agosto de 2026",
+    shortName: "Performance & Pipeline",
+    deepDiveIds: ["weasyprint-performance", "field-mismatch"],
   },
   {
     id: "multi-tema",
@@ -68,6 +76,8 @@ export const projects: Project[] = [
       "Passou a ser possível gerar um único PDF cobrindo qualquer combinação de temas, em vez de relatórios separados por tema.",
     techs: ["Python", "FastAPI", "TypeScript", "Next.js", "React"],
     link: "https://github.com/OCA-UFCG/Automatic-Reporting/pull/46",
+    dateLabel: "Julho de 2026",
+    shortName: "Relatórios Multi-tema",
   },
   {
     id: "design-cms",
@@ -86,6 +96,9 @@ export const projects: Project[] = [
       "Página de relatórios com conteúdo editável via CMS sem necessidade de deploy, e telas de relatório/tema visualmente alinhadas ao design aprovado.",
     techs: ["Next.js", "TypeScript", "Contentful", "Radix UI", "Tailwind CSS"],
     link: "https://github.com/OCA-UFCG/data-nordeste-frontend/pull/301",
+    dateLabel: "Julho – Setembro de 2026",
+    shortName: "Design System & CMS",
+    deepDiveIds: ["page-break"],
   },
   {
     id: "sap-frontend",
@@ -113,5 +126,7 @@ export const projects: Project[] = [
       "Storybook",
     ],
     link: "https://github.com/OCA-UFCG/SAP-frontend/pull/51",
+    dateLabel: "Fevereiro – Maio de 2026",
+    shortName: "SAP Frontend",
   },
 ];

@@ -1,5 +1,6 @@
 import { profile } from "@/data/profile";
 import { FloralAccent } from "@/components/ui/FloralAccent";
+import { PrintButton } from "@/components/ui/PrintButton";
 
 export function Hero() {
   return (
@@ -57,6 +58,7 @@ export function Hero() {
             ↓
           </span>
         </a>
+        <PrintButton />
       </div>
     </section>
   );

@@ -55,7 +55,7 @@ export function TechConstellation({ techs }: { techs: string[] }) {
         cy={centerY}
         r={4}
         className="fill-accent"
-        stroke="#ffecec"
+        stroke="var(--color-cream)"
         strokeWidth={1.5}
       />
       {points.map((point) => (
@@ -65,7 +65,7 @@ export function TechConstellation({ techs }: { techs: string[] }) {
             cy={point.y}
             r={4}
             className="fill-warm"
-            stroke="#ffecec"
+            stroke="var(--color-cream)"
             strokeWidth={1.5}
           />
           <text

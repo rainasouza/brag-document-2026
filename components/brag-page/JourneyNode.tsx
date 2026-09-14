@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import {
   JourneyCardBody,
   type JourneyItemData,
 } from "@/components/brag-page/JourneyCardBody";
+import { uiStrings } from "@/data/site";
 
 export type JourneyNodeProps = {
   item: JourneyItemData;
@@ -15,6 +16,24 @@ export type JourneyNodeProps = {
 
 export function JourneyNode({ item, index, total }: JourneyNodeProps) {
   const [expanded, setExpanded] = useState(false);
+  const wasExpanded = useRef(false);
+
+  // Na impressão, expande tudo para o PDF sair completo; depois restaura.
+  useEffect(() => {
+    const handleBeforePrint = () => {
+      setExpanded((current) => {
+        wasExpanded.current = current;
+        return true;
+      });
+    };
+    const handleAfterPrint = () => setExpanded(wasExpanded.current);
+    window.addEventListener("beforeprint", handleBeforePrint);
+    window.addEventListener("afterprint", handleAfterPrint);
+    return () => {
+      window.removeEventListener("beforeprint", handleBeforePrint);
+      window.removeEventListener("afterprint", handleAfterPrint);
+    };
+  }, []);
 
   const isFirst = index === 0;
   const isLast = index === total - 1;
@@ -64,7 +83,7 @@ export function JourneyNode({ item, index, total }: JourneyNodeProps) {
         </p>
         {isLast ? (
           <span className="rounded-full bg-ink px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-cream sm:text-[11px]">
-            agora
+            {uiStrings.now}
           </span>
         ) : null}
       </div>

@@ -6,72 +6,35 @@ import type { JourneyItemData } from "@/components/brag-page/JourneyCardBody";
 import { projects } from "@/data/projects";
 import { challenges } from "@/data/challenges";
 import { timeline } from "@/data/timeline";
+import { journeyConfig } from "@/data/journey";
 
-const PROJECT_ORDER = [
-  "sap-frontend",
-  "jinja-to-react-ssr",
-  "multi-tema",
-  "performance-pipeline",
-  "design-cms",
-];
+const orderedProjects = journeyConfig.projectOrder
+  .map((id) => projects.find((project) => project.id === id))
+  .filter((project): project is (typeof projects)[number] => Boolean(project));
 
-const PROJECT_DATES: Record<string, string> = {
-  "sap-frontend": "Fevereiro – Maio de 2026",
-  "jinja-to-react-ssr": "Maio de 2026",
-  "multi-tema": "Julho de 2026",
-  "performance-pipeline": "Agosto de 2026",
-  "design-cms": "Julho – Setembro de 2026",
-};
-
-const PROJECT_SHORT_NAMES: Record<string, string> = {
-  "jinja-to-react-ssr": "Jinja → React SSR",
-  "multi-tema": "Relatórios Multi-tema",
-  "sap-frontend": "SAP Frontend",
-  "performance-pipeline": "Performance & Pipeline",
-  "design-cms": "Design System & CMS",
-};
-
-const PROJECT_DEEP_DIVES: Record<string, string[]> = {
-  "performance-pipeline": ["weasyprint-performance", "field-mismatch"],
-  "design-cms": ["page-break"],
-};
-
-const orderedProjects = PROJECT_ORDER.map((id) =>
-  projects.find((project) => project.id === id),
-).filter((project): project is (typeof projects)[number] => Boolean(project));
-
-const inicio = timeline.find((step) => step.id === "inicio");
-const desenvolvimento = timeline.find((step) => step.id === "desenvolvimento");
-const atualmente = timeline.find((step) => step.id === "atualmente");
+function milestoneNode(id: string): JourneyItemData | null {
+  const step = timeline.find((entry) => entry.id === id);
+  if (!step) return null;
+  return {
+    id: step.id,
+    date: step.date,
+    eyebrow: step.label,
+    title: step.label,
+    summary: step.description,
+    flow: [],
+  };
+}
 
 function buildNodes(): JourneyItemData[] {
   const nodes: JourneyItemData[] = [];
 
-  if (inicio) {
-    nodes.push({
-      id: "inicio",
-      date: inicio.date,
-      eyebrow: "Início",
-      title: inicio.label,
-      summary: inicio.description,
-      flow: [],
-    });
-  }
-
-  if (desenvolvimento) {
-    nodes.push({
-      id: "desenvolvimento",
-      date: desenvolvimento.date,
-      eyebrow: "Desenvolvimento",
-      title: desenvolvimento.label,
-      summary: desenvolvimento.description,
-      flow: [],
-    });
+  for (const id of journeyConfig.openingMilestoneIds) {
+    const node = milestoneNode(id);
+    if (node) nodes.push(node);
   }
 
   orderedProjects.forEach((project) => {
-    const deepDiveIds = PROJECT_DEEP_DIVES[project.id] ?? [];
-    const deepDives = deepDiveIds
+    const deepDives = (project.deepDiveIds ?? [])
       .map((id) => challenges.find((challenge) => challenge.id === id))
       .filter((c): c is (typeof challenges)[number] => Boolean(c))
       .map((c) => ({
@@ -83,8 +46,8 @@ function buildNodes(): JourneyItemData[] {
 
     nodes.push({
       id: project.id,
-      date: PROJECT_DATES[project.id],
-      eyebrow: PROJECT_SHORT_NAMES[project.id] ?? project.name,
+      date: project.dateLabel,
+      eyebrow: project.shortName,
       title: project.name,
       summary: project.context,
       flow: [
@@ -99,15 +62,9 @@ function buildNodes(): JourneyItemData[] {
     });
   });
 
-  if (atualmente) {
-    nodes.push({
-      id: "atualmente",
-      date: atualmente.date,
-      eyebrow: "Atualmente",
-      title: atualmente.label,
-      summary: atualmente.description,
-      flow: [],
-    });
+  for (const id of journeyConfig.closingMilestoneIds) {
+    const node = milestoneNode(id);
+    if (node) nodes.push(node);
   }
 
   return nodes;

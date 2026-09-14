@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/Badge";
 import { FlowSteps } from "@/components/brag-page/FlowSteps";
 import { TechConstellation } from "@/components/brag-page/TechConstellation";
 import { FlowerBullet } from "@/components/ui/FlowerBullet";
+import { uiStrings } from "@/data/site";
 
 export type DeepDive = {
   title: string;
@@ -68,7 +69,7 @@ export function JourneyCardBody({
           aria-expanded={expanded}
           className="mt-4 inline-flex items-center gap-2 rounded-full border border-border/70 bg-soft/40 px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-soft/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
-          {expanded ? "Ver menos" : "Ver problema, ação e resultado"}
+          {expanded ? uiStrings.collapseDetails : uiStrings.expandDetails}
           <span aria-hidden className={expanded ? "rotate-180" : ""}>
             ↓
           </span>
@@ -117,7 +118,7 @@ export function JourneyCardBody({
                 rel="noreferrer"
                 className="underline decoration-accent decoration-2 underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
-                Ver no GitHub
+                {uiStrings.viewOnGitHub}
               </a>
             )}
           </Badge>
