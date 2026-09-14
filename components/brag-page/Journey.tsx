@@ -95,6 +95,7 @@ function buildNodes(): JourneyItemData[] {
       techs: project.techs,
       link: project.link,
       deepDives,
+      highlight: project.spotlight,
     });
   });
 

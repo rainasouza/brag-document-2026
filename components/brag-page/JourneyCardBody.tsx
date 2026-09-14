@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/Badge";
 import { FlowSteps } from "@/components/brag-page/FlowSteps";
 import { TechConstellation } from "@/components/brag-page/TechConstellation";
+import { FlowerBullet } from "@/components/ui/FlowerBullet";
 
 export type DeepDive = {
   title: string;
@@ -19,6 +20,7 @@ export type JourneyItemData = {
   techs?: string[];
   link?: string;
   deepDives?: DeepDive[];
+  highlight?: string;
 };
 
 type JourneyCardBodyProps = JourneyItemData & {
@@ -34,6 +36,7 @@ export function JourneyCardBody({
   techs,
   link,
   deepDives,
+  highlight,
   expanded,
   onToggleExpand,
 }: JourneyCardBodyProps) {
@@ -90,6 +93,15 @@ export function JourneyCardBody({
               </div>
             </div>
           ))}
+        </div>
+      ) : null}
+
+      {highlight ? (
+        <div className="mt-6 flex items-start gap-3 rounded-2xl border-2 border-accent bg-accent/15 p-4 sm:p-5">
+          <FlowerBullet className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+          <p className="text-sm font-medium leading-relaxed text-ink">
+            {highlight}
+          </p>
         </div>
       ) : null}
 

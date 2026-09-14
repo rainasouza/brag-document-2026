@@ -8,6 +8,7 @@ export type Project = {
   impact: string;
   techs: string[];
   link: string;
+  spotlight?: string;
 };
 
 export const projects: Project[] = [
@@ -23,9 +24,9 @@ export const projects: Project[] = [
       "Propus e implementei a migração de ponta a ponta. Era a primeira vez que eu fazia SSR, então validei a abordagem com um protótipo antes de remover o Jinja2",
       "Removi a dependência do Jinja2 e o template monolítico de utils/renderer.py",
       "Quebrei o layout em componentes React reutilizáveis (Cover, Report, ThemeDetail, Brand, PdfLayout)",
-      "Criei a nova pipeline de renderização (ssr-entry.jsx + utils/ssr.py) que gera o HTML consumido pelo WeasyPrint, mantendo paridade visual com o PDF antigo",
-      "Organizei a migração de forma incremental para não quebrar a geração de relatórios em produção durante a troca",
-    ],
+      "Criei a nova pipeline de renderização (ssr-entry.jsx + utils/ssr.py) que gera o HTML consumido pelo WeasyPrint, mantendo paridade visual com o PDF antigo",    ],
+    spotlight:
+      "Documentei todo o relatório no Coda por iniciativa própria, para deixar esse conhecimento acessível ao time, e pretendo manter a documentação atualizada",
     impact:
       "O relatório passou de uma string gigante para componentes isolados e reaproveitáveis. Isso destravou tudo que veio depois: multi-tema, redesign do encerramento, novos gráficos, e deixou as mudanças muito mais rápidas e seguras de revisar: em vez de caçar HTML dentro de Python, dá para mexer e testar cada pedaço de UI separadamente, inclusive por quem vem do frontend.",
     techs: ["React", "Vite", "Python", "WeasyPrint"],
