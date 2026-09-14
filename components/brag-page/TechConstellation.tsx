@@ -1,65 +1,85 @@
-export function TechConstellation({ techs }: { techs: string[] }) {
-  const centerX = 100;
-  const centerY = 60;
-  const radius = 46;
+const WIDTH = 300;
+const STEP = 34;
+const FONT_SIZE = 11;
 
-  const points = techs.map((tech, index) => {
-    const angle = (Math.PI * 2 * index) / techs.length - Math.PI / 2;
-    const x = centerX + radius * Math.cos(angle);
-    const y = centerY + radius * 0.62 * Math.sin(angle);
-    return { tech, x, y };
+export function TechConstellation({ techs }: { techs: string[] }) {
+  // Divide os itens entre coluna esquerda e direita, com espaçamento
+  // vertical uniforme: assim as labels nunca se sobrepõem.
+  const sides: { tech: string; right: boolean }[] = techs.map(
+    (tech, index) => ({ tech, right: index % 2 === 0 }),
+  );
+  const perSide = (right: boolean) => sides.filter((s) => s.right === right);
+  const maxSide = Math.max(perSide(true).length, perSide(false).length, 1);
+  const height = Math.max(150, maxSide * STEP + 40);
+  const centerX = WIDTH / 2;
+  const centerY = height / 2;
+
+  const counters = { left: 0, right: 0 };
+  const points = sides.map((side) => {
+    const column = perSide(side.right);
+    const i = counters[side.right ? "right" : "left"];
+    counters[side.right ? "right" : "left"] += 1;
+    const top = (height - (column.length - 1) * STEP) / 2;
+    const y = column.length === 1 ? centerY : top + i * STEP;
+    const dotX = side.right ? centerX + 22 : centerX - 22;
+    return {
+      tech: side.tech,
+      dotX,
+      y,
+      labelX: side.right ? dotX + 10 : dotX - 10,
+      textAnchor: side.right ? "start" : "end",
+    } as const;
   });
 
   return (
-    <div className="relative">
-      <svg
-        viewBox="0 0 200 120"
-        className="h-28 w-full text-border"
-        aria-hidden
-      >
-        {points.map((point) => (
-          <line
-            key={point.tech}
-            x1={centerX}
-            y1={centerY}
-            x2={point.x}
-            y2={point.y}
-            stroke="currentColor"
-            strokeWidth={1}
-          />
-        ))}
-        <circle cx={centerX} cy={centerY} r={4} className="fill-accent" />
-        {points.map((point) => (
+    <svg
+      viewBox={`0 0 ${WIDTH} ${height}`}
+      className="mx-auto h-auto w-full max-w-[300px] text-border"
+      role="img"
+      aria-label={`Tecnologias: ${techs.join(", ")}`}
+    >
+      {points.map((point) => (
+        <line
+          key={point.tech}
+          x1={centerX}
+          y1={centerY}
+          x2={point.dotX}
+          y2={point.y}
+          stroke="currentColor"
+          strokeWidth={1}
+        />
+      ))}
+      <circle cx={centerX} cy={centerY} r={9} className="fill-accent/25" />
+      <circle
+        cx={centerX}
+        cy={centerY}
+        r={4}
+        className="fill-accent"
+        stroke="#ffecec"
+        strokeWidth={1.5}
+      />
+      {points.map((point) => (
+        <g key={point.tech}>
           <circle
-            key={point.tech}
-            cx={point.x}
+            cx={point.dotX}
             cy={point.y}
-            r={3}
+            r={4}
             className="fill-warm"
+            stroke="#ffecec"
+            strokeWidth={1.5}
           />
-        ))}
-      </svg>
-
-      <ul className="sr-only">
-        {techs.map((tech) => (
-          <li key={tech}>{tech}</li>
-        ))}
-      </ul>
-
-      <div className="pointer-events-none absolute inset-0 grid grid-cols-1">
-        {points.map((point) => (
-          <span
-            key={point.tech}
-            className="pointer-events-auto absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-border/70 bg-white/80 px-2 py-0.5 text-[11px] font-medium text-ink-muted"
-            style={{
-              left: `${(point.x / 200) * 100}%`,
-              top: `${(point.y / 120) * 100}%`,
-            }}
+          <text
+            x={point.labelX}
+            y={point.y}
+            textAnchor={point.textAnchor}
+            dominantBaseline="middle"
+            fontSize={FONT_SIZE}
+            className="fill-ink-muted font-medium"
           >
             {point.tech}
-          </span>
-        ))}
-      </div>
-    </div>
+          </text>
+        </g>
+      ))}
+    </svg>
   );
 }

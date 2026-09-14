@@ -1,7 +1,6 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { FloralAccent } from "@/components/ui/FloralAccent";
-import { JourneyNode } from "@/components/brag-page/JourneyNode";
 import { JourneyMap } from "@/components/brag-page/JourneyMap";
 import type { JourneyItemData } from "@/components/brag-page/JourneyCardBody";
 import { projects } from "@/data/projects";
@@ -9,19 +8,19 @@ import { challenges } from "@/data/challenges";
 import { timeline } from "@/data/timeline";
 
 const PROJECT_ORDER = [
-  "jinja-to-react-ssr",
   "sap-frontend",
+  "jinja-to-react-ssr",
   "multi-tema",
   "performance-pipeline",
   "design-cms",
 ];
 
 const PROJECT_DATES: Record<string, string> = {
+  "sap-frontend": "Fevereiro – Maio de 2026",
   "jinja-to-react-ssr": "Maio de 2026",
   "multi-tema": "Julho de 2026",
   "performance-pipeline": "Agosto de 2026",
   "design-cms": "Julho – Setembro de 2026",
-  "sap-frontend": "[ADICIONAR PERÍODO]",
 };
 
 const PROJECT_SHORT_NAMES: Record<string, string> = {
@@ -123,27 +122,20 @@ export function Journey() {
       className="relative overflow-hidden bg-soft/30 px-6 py-20 sm:px-10 sm:py-28"
     >
       <FloralAccent className="pointer-events-none absolute -left-6 top-10 h-32 w-32 rotate-[-25deg] text-warm sm:h-40 sm:w-40 animate-sway" />
+      <FloralAccent className="pointer-events-none absolute -right-8 top-1/2 hidden h-28 w-28 rotate-[20deg] text-accent/50 md:block animate-sway" />
 
-      <div className="relative mx-auto max-w-5xl">
+      <div className="relative mx-auto max-w-4xl">
         <Reveal>
           <SectionHeading
             eyebrow="Trajetória"
-            title="Uma jornada, não uma lista"
-            description="Cada ponto é um momento real: um projeto entregue, um problema enfrentado, uma decisão tomada. Clique em qualquer ponto para ver o caminho completo — problema, ação e resultado."
+            title="Durante o período"
+            description="Siga a linha do tempo de cima para baixo e expanda cada ponto para ver problema, ação e resultado."
           />
         </Reveal>
 
-        <div className="mt-14 lg:hidden">
-          <ol>
-            {nodes.map((node, index) => (
-              <JourneyNode key={node.id} index={index} {...node} />
-            ))}
-          </ol>
-        </div>
-
-        <Reveal delay={100} className="mt-14 hidden lg:block">
+        <div className="mt-14">
           <JourneyMap nodes={nodes} />
-        </Reveal>
+        </div>
       </div>
     </section>
   );

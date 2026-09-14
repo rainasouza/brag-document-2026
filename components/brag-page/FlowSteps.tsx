@@ -7,11 +7,11 @@ const toneClasses = ["bg-soft/60", "bg-warm/50", "bg-accent/30"];
 
 export function FlowSteps({ steps }: { steps: FlowStep[] }) {
   return (
-    <div className="flex flex-col gap-3 lg:flex-row lg:items-stretch lg:gap-0">
+    <div className="flex flex-col gap-3">
       {steps.map((step, index) => (
-        <div key={step.label} className="contents">
+        <div key={step.label}>
           <div
-            className={`flex-1 rounded-xl border border-border/60 p-4 ${
+            className={`rounded-xl border border-border/60 p-4 sm:p-5 ${
               toneClasses[index % toneClasses.length]
             }`}
           >
@@ -25,10 +25,9 @@ export function FlowSteps({ steps }: { steps: FlowStep[] }) {
           {index < steps.length - 1 ? (
             <span
               aria-hidden
-              className="flex shrink-0 items-center justify-center py-1 text-ink-muted lg:px-3 lg:py-0"
+              className="flex items-center justify-center py-1 text-ink-muted"
             >
-              <span className="lg:hidden">↓</span>
-              <span className="hidden lg:inline">→</span>
+              ↓
             </span>
           ) : null}
         </div>

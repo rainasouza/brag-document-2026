@@ -29,6 +29,7 @@ export function Hero() {
           } as React.CSSProperties
         }
       />
+      <FloralAccent className="pointer-events-none absolute bottom-10 right-8 hidden h-16 w-16 rotate-[30deg] text-accent/60 sm:block animate-sway" />
 
       <div className="relative mx-auto flex max-w-5xl flex-col items-start gap-6">
         <p className="text-sm font-medium uppercase tracking-[0.25em] text-ink-muted">

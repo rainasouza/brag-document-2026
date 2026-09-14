@@ -11,13 +11,14 @@ export function Overview() {
       className="relative overflow-hidden px-6 py-20 sm:px-10 sm:py-28"
     >
       <FloralAccent className="pointer-events-none absolute -right-10 top-6 h-36 w-36 rotate-[20deg] text-warm sm:h-44 sm:w-44 animate-sway" />
+      <FloralAccent className="pointer-events-none absolute -left-8 bottom-8 hidden h-28 w-28 rotate-[30deg] text-accent/50 sm:block animate-sway" />
 
       <div className="relative mx-auto max-w-5xl">
         <Reveal>
           <SectionHeading
             eyebrow="Visão geral"
             title="O período em números"
-            description="Antes dos detalhes, um retrato rápido — a trajetória completa está logo abaixo."
+            description="Antes dos detalhes, um retrato rápido: a trajetória completa está logo abaixo."
           />
         </Reveal>
 

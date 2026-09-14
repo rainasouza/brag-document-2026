@@ -1,7 +1,7 @@
 export const stats = [
   { label: "PRs mergeados", value: "48" },
   { label: "Repositórios", value: "3" },
-  { label: "Meses de atuação", value: "7" },
+  { label: "Meses de atuação", value: "9" },
 ];
 
 export const areas = [

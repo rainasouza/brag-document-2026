@@ -27,7 +27,6 @@ type JourneyCardBodyProps = JourneyItemData & {
 };
 
 export function JourneyCardBody({
-  date,
   eyebrow,
   title,
   summary,
@@ -42,12 +41,9 @@ export function JourneyCardBody({
 
   return (
     <div>
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-muted">
-          {eyebrow}
-        </p>
-        <p className="text-xs text-ink-muted">{date}</p>
-      </div>
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-muted">
+        {eyebrow}
+      </p>
 
       <h3 className="mt-2 font-display text-2xl font-semibold sm:text-3xl">
         {title}

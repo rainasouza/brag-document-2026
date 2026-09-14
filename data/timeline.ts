@@ -18,7 +18,7 @@ export const timeline: TimelineStep[] = [
     label: "Desenvolvimento",
     date: "Maio – Junho de 2026",
     description:
-      "Passei a atuar também no backend do Automatic Reporting (Python/FastAPI), além do frontend em Next.js.",
+      "Passei a atuar em todas as frentes. Nas tasks que apareciam sem muita urgência, eu tive a oportunidade de perguntar mais e conhecer mais sobre o nosso stack. Por exemplo, tasks envolvendo as VMs e a cloud do LSD.",
   },
   {
     id: "desafio",
@@ -32,6 +32,6 @@ export const timeline: TimelineStep[] = [
     label: "Atualmente",
     date: "Setembro de 2026",
     description:
-      "Contribuindo em ambos os repositórios: novos dados (economia, meio ambiente) e integração com Contentful.",
+      "Contribuindo ao lado do OCA com o relatório automático (agora 'relatório personalizado'), indo em reuniões, entregando as novas estilizações pedidas pelo design e as novas features.",
   },
 ];

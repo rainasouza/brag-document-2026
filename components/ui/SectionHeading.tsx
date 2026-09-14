@@ -1,3 +1,5 @@
+import { FlowerBullet } from "@/components/ui/FlowerBullet";
+
 type SectionHeadingProps = {
   eyebrow?: string;
   title: string;
@@ -12,7 +14,8 @@ export function SectionHeading({
   return (
     <div className="max-w-2xl">
       {eyebrow ? (
-        <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-ink-muted">
+        <p className="mb-3 flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-ink-muted">
+          <FlowerBullet className="h-3.5 w-3.5 shrink-0 text-accent" />
           {eyebrow}
         </p>
       ) : null}

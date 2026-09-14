@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Raína Souza — Retrospectiva Profissional",
+  title: "Raína Souza: Retrospectiva Profissional",
   description:
     "Retrospectiva de sete meses de trabalho na OCA-UFCG: projetos, desafios, aprendizados e próximos passos.",
 };
